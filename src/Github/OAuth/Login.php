@@ -1,10 +1,10 @@
 <?php
 
-namespace Milo\Github\OAuth;
+namespace Github\OAuth;
 
-use Milo\Github;
-use Milo\Github\Storages;
-use Milo\Github\Http;
+use Github;
+use Github\Storages;
+use Github\Http;
 
 
 /**

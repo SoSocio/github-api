@@ -1,8 +1,8 @@
 <?php
 
-namespace Milo\Github\Storages;
+namespace Github\Storages;
 
-use Milo\Github;
+use Github;
 
 
 /**

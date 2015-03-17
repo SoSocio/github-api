@@ -1,6 +1,6 @@
 <?php
 
-namespace Milo\Github\Storages;
+namespace Github\Storages;
 
 
 interface ICache

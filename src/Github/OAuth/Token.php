@@ -1,8 +1,8 @@
 <?php
 
-namespace Milo\Github\OAuth;
+namespace Github\OAuth;
 
-use Milo\Github;
+use Github;
 
 
 /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace Milo\Github\Http;
+namespace Github\Http;
 
-use Milo\Github;
-use Milo\Github\Storages;
+use Github;
+use Github\Storages;
 
 
 /**

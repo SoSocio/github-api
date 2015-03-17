@@ -1,6 +1,6 @@
 <?php
 
-namespace Milo\Github;
+namespace Github;
 
 
 /**

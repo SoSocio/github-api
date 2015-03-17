@@ -1,8 +1,8 @@
 <?php
 
-namespace Milo\Github\Http;
+namespace Github\Http;
 
-use Milo\Github;
+use Github;
 
 
 /**

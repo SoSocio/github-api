@@ -2,12 +2,12 @@
 
 
 /**
- * All Milo\Github exceptions at one place. Whole library does not throw anything else.
+ * All Github exceptions at one place. Whole library does not throw anything else.
  *
  * @author  Miloslav Hůla (https://github.com/milo)
  */
 
-namespace Milo\Github {
+namespace Github {
 	/**
 	 * Marker interface.
 	 */
@@ -139,8 +139,8 @@ namespace Milo\Github {
 }
 
 
-namespace Milo\Github\Http {
-	use Milo\Github;
+namespace Github\Http {
+	use Github;
 
 
 	/**
@@ -152,8 +152,8 @@ namespace Milo\Github\Http {
 }
 
 
-namespace Milo\Github\OAuth {
-	use Milo\Github;
+namespace Github\OAuth {
+	use Github;
 
 	/**
 	 * Something fails during the token obtaining.
@@ -164,8 +164,8 @@ namespace Milo\Github\OAuth {
 }
 
 
-namespace Milo\Github\Storages {
-	use Milo\Github;
+namespace Github\Storages {
+	use Github;
 
 	/**
 	 * Directory is missing and/or cannot be created.
