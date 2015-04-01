@@ -262,6 +262,8 @@ class Api extends Sanity
 		$code = $response->getCode();
 		if (($okCodes === NULL && $code >= 300) || (is_array($okCodes) && !in_array($code, $okCodes))) {
 			/** @var $content \stdClass */
+			throw new \Exception(self::errorMessage($content));
+			/*
 			switch ($code) {
 				case Http\Response::S400_BAD_REQUEST:
 					throw new BadRequestException(self::errorMessage($content), $code, NULL, $response);
@@ -281,7 +283,7 @@ class Api extends Sanity
 				case Http\Response::S422_UNPROCESSABLE_ENTITY:
 					throw new UnprocessableEntityException(self::errorMessage($content), $code, NULL, $response);
 			}
-
+			*/
 			$message = $okCodes === NULL ? '< 300' : implode(' or ', $okCodes);
 			throw new UnexpectedResponseException("Expected response with code $message.", $code, NULL, $response);
 		}
