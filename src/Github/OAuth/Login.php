@@ -117,7 +117,7 @@ class Login extends Github\Sanity
 
 			$json = Github\Helpers::jsonDecode($response->getContent());
 
-		} catch (Github\JsonException $e) {
+		} catch (JsonException $e) {
 			throw new LoginException('Bad JSON in response.', 0, $e);
 		}
 
