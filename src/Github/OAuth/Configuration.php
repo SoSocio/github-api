@@ -27,7 +27,7 @@ class Configuration extends Github\Sanity
 	 * @param  string
 	 * @param  string[]
 	 */
-	public function __construct($clientId, $clientSecret, array $scopes = [])
+	public function __construct($clientId, $clientSecret, array $scopes = array())
 	{
 		$this->clientId = $clientId;
 		$this->clientSecret = $clientSecret;
@@ -40,7 +40,7 @@ class Configuration extends Github\Sanity
 	 */
 	public static function fromArray(array $conf)
 	{
-		return new static($conf['clientId'], $conf['clientSecret'], isset($conf['scopes']) ? $conf['scopes'] : []);
+		return new static($conf['clientId'], $conf['clientSecret'], isset($conf['scopes']) ? $conf['scopes'] : array());
 	}
 
 }

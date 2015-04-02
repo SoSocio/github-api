@@ -13,11 +13,11 @@ use Github;
 abstract class AbstractClient extends Github\Sanity implements IClient
 {
 	/** @var int[]  will follow Location header on these response codes */
-	public $redirectCodes = [
+	public $redirectCodes = array(
 		Response::S301_MOVED_PERMANENTLY,
 		Response::S302_FOUND,
 		Response::S307_TEMPORARY_REDIRECT,
-	];
+	);
 
 	/** @var int  maximum redirects per request*/
 	public $maxRedirects = 5;

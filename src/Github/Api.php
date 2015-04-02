@@ -19,7 +19,7 @@ class Api extends Sanity
 	private $defaultAccept = 'application/vnd.github.v3+json';
 
 	/** @var array|NULL */
-	private $defaultParameters = [];
+	private $defaultParameters = array();
 
 	/** @var Http\IClient */
 	private $client;
@@ -59,7 +59,7 @@ class Api extends Sanity
 	 */
 	public function setDefaultParameters(array $defaults = NULL)
 	{
-		$this->defaultParameters = $defaults ?: [];
+		$this->defaultParameters = $defaults ?: array();
 		return $this;
 	}
 
@@ -82,7 +82,7 @@ class Api extends Sanity
 	 *
 	 * @throws MissingParameterException
 	 */
-	public function delete($urlPath, array $parameters = [], array $headers = [])
+	public function delete($urlPath, array $parameters = array(), array $headers = array())
 	{
 		return $this->request(
 			$this->createRequest(Http\Request::DELETE, $urlPath, $parameters, $headers)
@@ -99,7 +99,7 @@ class Api extends Sanity
 	 *
 	 * @throws MissingParameterException
 	 */
-	public function get($urlPath, array $parameters = [], array $headers = [])
+	public function get($urlPath, array $parameters = array(), array $headers = array())
 	{
 		return $this->request(
 			$this->createRequest(Http\Request::GET, $urlPath, $parameters, $headers)
@@ -116,7 +116,7 @@ class Api extends Sanity
 	 *
 	 * @throws MissingParameterException
 	 */
-	public function head($urlPath, array $parameters = [], array $headers = [])
+	public function head($urlPath, array $parameters = array(), array $headers = array())
 	{
 		return $this->request(
 			$this->createRequest(Http\Request::HEAD, $urlPath, $parameters, $headers)
@@ -135,7 +135,7 @@ class Api extends Sanity
 	 * @throws MissingParameterException
 	 * @throws JsonException
 	 */
-	public function patch($urlPath, $content, array $parameters = [], array $headers = [])
+	public function patch($urlPath, $content, array $parameters = array(), array $headers = array())
 	{
 		return $this->request(
 			$this->createRequest(Http\Request::PATCH, $urlPath, $parameters, $headers, $content)
@@ -154,7 +154,7 @@ class Api extends Sanity
 	 * @throws MissingParameterException
 	 * @throws JsonException
 	 */
-	public function post($urlPath, $content, array $parameters = [], array $headers = [])
+	public function post($urlPath, $content, array $parameters = array(), array $headers = array())
 	{
 		return $this->request(
 			$this->createRequest(Http\Request::POST, $urlPath, $parameters, $headers, $content)
@@ -173,7 +173,7 @@ class Api extends Sanity
 	 * @throws MissingParameterException
 	 * @throws JsonException
 	 */
-	public function put($urlPath, $content = NULL, array $parameters = [], array $headers = [])
+	public function put($urlPath, $content = NULL, array $parameters = array(), array $headers = array())
 	{
 		return $this->request(
 			$this->createRequest(Http\Request::PUT, $urlPath, $parameters, $headers, $content)
@@ -214,7 +214,7 @@ class Api extends Sanity
 	 * @throws MissingParameterException  when substitution is used in URL but parameter is missing
 	 * @throws JsonException  when encoding to JSON fails
 	 */
-	public function createRequest($method, $urlPath, array $parameters = [], array $headers = [], $content = NULL)
+	public function createRequest($method, $urlPath, array $parameters = array(), array $headers = array(), $content = NULL)
 	{
 		if (stripos($urlPath, $this->url) === 0) {
 			$urlPath = substr($urlPath, strlen($this->url));
@@ -302,7 +302,7 @@ class Api extends Sanity
 	 *
 	 * @throws MissingParameterException
 	 */
-	public function paginator($urlPath, array $parameters = [], array $headers = [])
+	public function paginator($urlPath, array $parameters = array(), array $headers = array())
 	{
 		return new Paginator(
 			$this,
@@ -382,21 +382,21 @@ class Api extends Sanity
 	{
 		$parameters += $defaultParameters;
 
-		static $operatorFlags = [
-			''  => ['prefix' => '',  'separator' => ',', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => FALSE],
-			'+' => ['prefix' => '',  'separator' => ',', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => TRUE],
-			'#' => ['prefix' => '#', 'separator' => ',', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => TRUE],
-			'.' => ['prefix' => '.', 'separator' => '.', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => FALSE],
-			'/' => ['prefix' => '/', 'separator' => '/', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => FALSE],
-			';' => ['prefix' => ';', 'separator' => ';', 'named' => TRUE,  'ifEmpty' => '',  'reserved' => FALSE],
-			'?' => ['prefix' => '?', 'separator' => '&', 'named' => TRUE,  'ifEmpty' => '=', 'reserved' => FALSE],
-			'&' => ['prefix' => '&', 'separator' => '&', 'named' => TRUE,  'ifEmpty' => '=', 'reserved' => FALSE],
-		];
+		static $operatorFlags = array(
+			''  => array('prefix' => '',  'separator' => ',', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => FALSE),
+			'+' => array('prefix' => '',  'separator' => ',', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => TRUE),
+			'#' => array('prefix' => '#', 'separator' => ',', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => TRUE),
+			'.' => array('prefix' => '.', 'separator' => '.', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => FALSE),
+			'/' => array('prefix' => '/', 'separator' => '/', 'named' => FALSE, 'ifEmpty' => '',  'reserved' => FALSE),
+			';' => array('prefix' => ';', 'separator' => ';', 'named' => TRUE,  'ifEmpty' => '',  'reserved' => FALSE),
+			'?' => array('prefix' => '?', 'separator' => '&', 'named' => TRUE,  'ifEmpty' => '=', 'reserved' => FALSE),
+			'&' => array('prefix' => '&', 'separator' => '&', 'named' => TRUE,  'ifEmpty' => '=', 'reserved' => FALSE),
+		);
 
 		return preg_replace_callback('~{([+#./;?&])?([^}]+?)}~', function($m) use ($url, & $parameters, $operatorFlags) {
 			$flags = $operatorFlags[$m[1]];
 
-			$translated = [];
+			$translated = array();
 			foreach (explode(',', $m[2]) as $name) {
 				$explode = FALSE;
 				$maxLength = NULL;
@@ -423,10 +423,10 @@ class Api extends Sanity
 
 					// The '*' (explode) modifier
 					if ($explode) {
-						$parts = [];
+						$parts = array();
 						if ($isAssoc) {
 							$this->walk($value, function ($v, $k) use (& $parts, $flags, $maxLength) {
-								$parts[] = $this->prefix(['named' => TRUE] + $flags, $k, $this->escape($flags, $v, $maxLength));
+								$parts[] = $this->prefix(array('named' => TRUE) + $flags, $k, $this->escape($flags, $v, $maxLength));
 							});
 
 						} elseif ($flags['named']) {
@@ -449,7 +449,7 @@ class Api extends Sanity
 						}
 
 					} else {
-						$parts = [];
+						$parts = array();
 						$this->walk($value, function($v, $k) use (& $parts, $isAssoc, $flags, $maxLength) {
 							if ($isAssoc) {
 								$parts[] = $this->escape($flags, $k);

@@ -55,12 +55,12 @@ class Login extends Github\Sanity
 	{
 		/** @todo Something more safe? */
 		$state = sha1(uniqid(microtime(TRUE), TRUE));
-		$params = [
+		$params = array(
 			'client_id' => $this->conf->clientId,
 			'redirect_uri' => $backUrl,
 			'scope' => implode(',', $this->conf->scopes),
 			'state' => $state,
-		];
+		);
 
 		$this->storage->set('auth.state', $state);
 
@@ -87,16 +87,16 @@ class Login extends Github\Sanity
 			throw new LoginException('OAuth security state does not match.');
 		}
 
-		$params = [
+		$params = array(
 			'client_id' => $this->conf->clientId,
 			'client_secret' => $this->conf->clientSecret,
 			'code' => $code,
-		];
+		);
 
-		$headers = [
+		$headers = array(
 			'Accept' => 'application/json',
 			'Content-Type' => 'application/x-www-form-urlencoded',
-		];
+		);
 
 		$request = new Http\Request(Http\Request::POST, $this->tokenUrl, $headers, http_build_query($params));
 		try {
@@ -121,7 +121,7 @@ class Login extends Github\Sanity
 			throw new LoginException('Bad JSON in response.', 0, $e);
 		}
 
-		$token = new Token($json->access_token, $json->token_type, strlen($json->scope) ? explode(',', $json->scope) : []);
+		$token = new Token($json->access_token, $json->token_type, strlen($json->scope) ? explode(',', $json->scope) : array());
 		$this->storage->set('auth.token', $token);
 		$this->storage->remove('auth.state');
 

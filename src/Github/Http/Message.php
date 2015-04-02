@@ -13,7 +13,7 @@ use Github;
 abstract class Message extends Github\Sanity
 {
 	/** @var array[name => value] */
-	private $headers = [];
+	private $headers = array();
 
 	/** @var string|NULL */
 	private $content;
@@ -23,7 +23,7 @@ abstract class Message extends Github\Sanity
 	 * @param  array
 	 * @param  string|NULL
 	 */
-	public function __construct(array $headers = [], $content = NULL)
+	public function __construct(array $headers = array(), $content = NULL)
 	{
 		$this->headers = array_change_key_case($headers, CASE_LOWER);
 		$this->content = $content;

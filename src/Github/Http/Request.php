@@ -35,7 +35,7 @@ class Request extends Message
 	 * @param  array
 	 * @param  string|NULL
 	 */
-	public function __construct($method, $url, array $headers = [], $content = NULL)
+	public function __construct($method, $url, array $headers = array(), $content = NULL)
 	{
 		$this->method = $method;
 		$this->url = $url;

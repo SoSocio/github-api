@@ -130,7 +130,7 @@ class Paginator extends Sanity implements \Iterator
 	 */
 	public static function parsePage($url)
 	{
-		list (, $parametersStr) = explode('?', $url, 2) + ['', ''];
+		list (, $parametersStr) = explode('?', $url, 2) + array('', '');
 		parse_str($parametersStr, $parameters);
 
 		return isset($parameters['page'])

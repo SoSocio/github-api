@@ -13,13 +13,13 @@ namespace Github;
  */
 class Helpers
 {
-	private static $jsonMessages = [
+	private static $jsonMessages = array(
 		JSON_ERROR_DEPTH => 'The maximum stack depth has been exceeded',
 		JSON_ERROR_STATE_MISMATCH => 'Syntax error, malformed JSON',
 		JSON_ERROR_CTRL_CHAR => 'Unexpected control character found',
 		JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON',
 		JSON_ERROR_UTF8 => 'Invalid UTF-8 sequence',
-	];
+	);
 
 
 	/** @var Http\IClient */

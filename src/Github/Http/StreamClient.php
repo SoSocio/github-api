@@ -37,27 +37,27 @@ class StreamClient extends AbstractClient
 	 */
 	protected function process(Request $request)
 	{
-		$headerStr = [];
+		$headerStr = array();
 		foreach ($request->getHeaders() as $name => $value) {
 			foreach ((array) $value as $v) {
 				$headerStr[] = "$name: $v";
 			}
 		}
 
-		$options = [
-			'http' => [
+		$options = array(
+			'http' => array(
 				'method' => $request->getMethod(),
 				'header' => implode("\r\n", $headerStr) . "\r\n",
 				'follow_location' => 0,  # Github sets the Location header for 201 code too and redirection is not required for us
 				'protocol_version' => 1.1,
 				'ignore_errors' => TRUE,
-			],
-			'ssl' => [
+			),
+			'ssl' => array(
 				'verify_peer' => TRUE,
 				'cafile' => realpath(__DIR__ . '/../../ca-chain.crt'),
 				'disable_compression' => TRUE,  # Effective since PHP 5.4.13
-			],
-		];
+			),
+		);
 
 		if (($content = $request->getContent()) !== NULL) {
 			$options['http']['content'] = $content;
@@ -101,17 +101,17 @@ class StreamClient extends AbstractClient
 		}
 		unset($http_response_header[0]);
 
-		$headers = [];
+		$headers = array();
 		foreach ($http_response_header as $header) {
-			if (in_array(substr($header, 0, 1), [' ', "\t"], TRUE)) {
+			if (in_array(substr($header, 0, 1), array(' ', "\t"), TRUE)) {
 				$headers[$last] .= ' ' . trim($header);  # RFC2616, 2.2
 			} else {
-				list($name, $value) = explode(':', $header, 2) + [NULL, NULL];
+				list($name, $value) = explode(':', $header, 2) + array(NULL, NULL);
 				$headers[$last = trim($name)] = trim($value);
 			}
 		}
 
-		return [$m[1], $headers, $content];
+		return array($m[1], $headers, $content);
 	}
 
 }

@@ -57,7 +57,7 @@ class CachedClient extends Github\Sanity implements IClient
 	{
 		$request = clone $request;
 
-		$cacheKey = implode('.', [
+		$cacheKey = implode('.', array(
 			$request->getMethod(),
 			$request->getUrl(),
 
@@ -65,7 +65,7 @@ class CachedClient extends Github\Sanity implements IClient
 			$request->getHeader('Accept'),
 			$request->getHeader('Accept-Encoding'),
 			$request->getHeader('Authorization')
-		]);
+		));
 
 		if ($cached = $this->cache->load($cacheKey)) {
 			if ($this->forbidRecheck) {

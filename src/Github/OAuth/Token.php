@@ -27,7 +27,7 @@ class Token extends Github\Sanity
 	 * @param  string
 	 * @param  string[]
 	 */
-	public function __construct($value, $type = '', array $scopes = [])
+	public function __construct($value, $type = '', array $scopes = array())
 	{
 		$this->value = $value;
 		$this->type = $type;
@@ -74,11 +74,11 @@ class Token extends Github\Sanity
 			return TRUE;
 		}
 
-		static $superiors = [
+		static $superiors = array(
 			'user:email' => 'user',
 			'user:follow' => 'user',
 			'notifications' => 'repo',
-		];
+		);
 
 		if (array_key_exists($scope, $superiors) && in_array($superiors[$scope], $this->scopes, TRUE)) {
 			return TRUE;
